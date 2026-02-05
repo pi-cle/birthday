@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Happy Birthday ❤️</title>
+  <title>Happy Birthday Gemoykuu ❤️</title>
 
   <style>
     * {
@@ -35,10 +35,21 @@
       animation: fadeUp 1.2s ease;
       z-index: 2;
     }
-
+.lcard {
+      width: 100%;
+      max-width: 380px;
+      max-height: 85dvh;
+      padding: 15px 15px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+      overflow-y: auto;
+      animation: fadeUp 1.2s ease;
+      z-index: 2;
+    }
     .heart {
       font-size: 38px;
-      animation: 1s infinite;
+      animation: beat 1s infinite;
       margin-bottom: 8px;
     }
 
@@ -50,6 +61,12 @@
 
     p {
       color: #555;
+      font-size: clamp(14px, 4vw, 15.5px);
+      line-height: 1.65;
+    }
+
+  .p2 {
+      color: #ff4d6d;
       font-size: clamp(14px, 4vw, 15.5px);
       line-height: 1.65;
     }
@@ -109,37 +126,48 @@
       Terima kasih karena sudah hadir di hidupku.
       Aku bangga sama kamu, Loveuuu 🤍
     </p>
-    <div class="">tap sekali ya 🎵</div>
+    <div class="lcard">
+      <p>
+        tap sekali yaa ❤️
+      </p>
   </div>
 
-  <script>
-    const music = document.getElementById("bgMusic");
-    let played = false;
+ <script>
+const music = document.getElementById("bgMusic");
+let played = false;
 
-    function playMusic() {
-      if (!played) {
-        music.volume = 0.6;
-        music.play().catch(() => {});
-        played = true;
-        document.querySelector(".tap-hint").style.display = "none";
-      }
-    }
+function playMusic() {
+  if (!played) {
+    music.volume = 0.6;
+    music.play().catch(() => {});
+    played = true;
 
-    document.body.addEventListener("click", playMusic);
-    document.body.addEventListener("touchstart", playMusic);
+    const hint = document.querySelector(".tap-hint");
+    if (hint) hint.style.display = "none";
+  }
+}
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "floating-heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
-    }
 
-    setInterval(createHeart, 650);
-  </script>
+document.body.addEventListener("click", playMusic);
+document.body.addEventListener("touchstart", playMusic);
+
+// ❤️ floating hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "floating-heart";
+  heart.innerHTML = "🤍";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 14 + 14) + "px";
+  heart.style.opacity = Math.random() * 0.5 + 0.4;
+  heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 150);
+</script>
+
 
 </body>
 </html>
