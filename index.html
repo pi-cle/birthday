@@ -36,22 +36,9 @@
       z-index: 2;
     }
 
-    .Lcard {
-      background: #fff;
-      width: 100%;
-      max-width: 380px;
-      max-height: 85dvh;
-      padding: 22px 20px;
-      border-radius: 22px;
-      text-align: center;
-      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
-      overflow-y: auto;
-      z-index: 2;
-    }
-
     .heart {
       font-size: 38px;
-      animation: beat 1s infinite;
+      animation: 1s infinite;
       margin-bottom: 8px;
     }
 
@@ -69,10 +56,10 @@
 
     .tap-hint {
       margin-top: 14px;
-      font-size: 12px;
+      font-size: clamp(14px, 4vw, 15.5px);
       color: #ff4d6d;
       opacity: 0.85;
-      animation: blink 1.5s infinite;
+      animation: Breathe 1.5s infinite;
     }
 
     @keyframes beat {
@@ -85,8 +72,8 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes blink {
-      0%,100% { opacity: .4; }
+    @keyframes Breathe {
+      0%, 50%, 100% { opacity: .4; }
       50% { opacity: 1; }
     }
 
@@ -106,45 +93,41 @@
 </head>
 <body>
 
-  <!-- 🎵 Perfect – One Direction (autoplay muted, legal) -->
-  <iframe
-    id="ytMusic"
-    src="https://www.youtube.com/embed/Ho32Oh6b4jc?autoplay=1&mute=1&loop=1&playlist=Ho32Oh6b4jc"
-    allow="autoplay"
-    style="display:none">
-  </iframe>
+  <!-- 🎵 OneDrive Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://ondrivestorage-my.sharepoint.com/:u:/g/personal/ohmemories_ondrivestorage_my_id/IQDPqefT3zfRQY5dTiU3VQnsAanPNeNPrt8xkbXOaZ7QI6U" type="audio/mpeg">
+  </audio>
 
   <div class="card">
     <div class="heart">❤️</div>
-    <h1>Happy Birthday, Sayang</h1>
+    <h1>Happy Birthday, Gemoykuu
+    </h1>
     <p>
       Semoga di umur yang baru ini, kamu selalu dikelilingi hal-hal baik.<br><br>
-      Langkahmu dipermudah, diberikan karir yang baguss, dan semua yang kamu perjuangkan
-      satu per satu tercapai, Amiiin <br><br>
+      Langkahmu dipermudah, diberikan karir yang bagus, dan semua yang kamu perjuangkan
+      satu per satu tercapai, Aamiin 🤍<br><br>
       Terima kasih karena sudah hadir di hidupku.
       Aku bangga sama kamu, Loveuuu 🤍
     </p>
-    <div class="Lcard">
-    <div class="tap-hint">tap sekali ya 🎵</div>
+    <div class="">tap sekali ya 🎵</div>
   </div>
 
   <script>
-    // 🎵 unmute after first interaction (HP safe)
+    const music = document.getElementById("bgMusic");
     let played = false;
-    const iframe = document.getElementById("ytMusic");
 
-    function enableMusic() {
+    function playMusic() {
       if (!played) {
-        iframe.src = iframe.src.replace("mute=1", "mute=0");
+        music.volume = 0.6;
+        music.play().catch(() => {});
         played = true;
         document.querySelector(".tap-hint").style.display = "none";
       }
     }
 
-    document.body.addEventListener("click", enableMusic);
-    document.body.addEventListener("touchstart", enableMusic);
+    document.body.addEventListener("click", playMusic);
+    document.body.addEventListener("touchstart", playMusic);
 
-    // ❤️ lighter floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "floating-heart";
@@ -160,6 +143,3 @@
 
 </body>
 </html>
-
-
-
