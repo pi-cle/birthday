@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      color: #ff5e78;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #555;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .heart {
+      font-size: 40px;
+      animation: beat 1s infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 20px;
+      color: #ff5e78;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Happy Birthday, Sayang</h1>
+    <p>
+      Semoga di umur yang baru ini, kamu selalu dikelilingi hal-hal baik.<br><br>
+      Langkahmu dipermudah, hatimu ditenangkan, dan semua yang kamu perjuangkan
+      satu per satu tercapai.<br><br>
+      Terima kasih karena sudah hadir di hidupku.
+      Aku bangga sama kamu 🤍
+    </p>
+  </div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
