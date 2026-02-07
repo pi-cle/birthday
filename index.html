@@ -1,173 +1,184 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Happy Birthday Gemoykuu ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday gemeyku ❤️</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100dvh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-      overflow: hidden;
-    }
-
-    .card {
-      background: #fff;
-      width: 100%;
-      max-width: 380px;
-      max-height: 85dvh;
-      padding: 22px 20px;
-      border-radius: 22px;
-      text-align: center;
-      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
-      overflow-y: auto;
-      animation: fadeUp 1.2s ease;
-      z-index: 2;
-    }
-.lcard {
-      width: 100%;
-      max-width: 380px;
-      max-height: 85dvh;
-      padding: 15px 15px;
-      border-radius: 22px;
-      text-align: center;
-      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
-      overflow-y: auto;
-      animation: fadeUp 1.2s ease;
-      z-index: 2;
-    }
-    .heart {
-      font-size: 38px;
-      animation: beat 1s infinite;
-      margin-bottom: 8px;
-    }
-
-    h1 {
-      color: #ff4d6d;
-      font-size: clamp(20px, 5vw, 24px);
-      margin: 10px 0 14px;
-    }
-
-    p {
-      color: #555;
-      font-size: clamp(14px, 4vw, 15.5px);
-      line-height: 1.65;
-    }
-
-  .p2 {
-      color: #ff4d6d;
-      font-size: clamp(14px, 4vw, 15.5px);
-      line-height: 1.65;
-    }
-
-    .tap-hint {
-      margin-top: 14px;
-      font-size: clamp(14px, 4vw, 15.5px);
-      color: #ff4d6d;
-      opacity: 0.85;
-      animation: Breathe 1.5s infinite;
-    }
-
-    @keyframes beat {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes Breathe {
-      0%, 50%, 100% { opacity: .4; }
-      50% { opacity: 1; }
-    }
-
-    .floating-heart {
-      position: fixed;
-      bottom: -10px;
-      font-size: 16px;
-      pointer-events: none;
-      animation: floatUp linear forwards;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- 🎵 OneDrive Music -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://ondrivestorage-my.sharepoint.com/:u:/g/personal/ohmemories_ondrivestorage_my_id/IQDPqefT3zfRQY5dTiU3VQnsAanPNeNPrt8xkbXOaZ7QI6U" type="audio/mpeg">
-  </audio>
-
-  <div class="card">
-    <div class="heart">❤️</div>
-    <h1>Happy Birthday, Gemoykuu
-    </h1>
-    <p>
-      Semoga di umur yang baru ini, kamu selalu dikelilingi hal-hal baik.<br><br>
-      Langkahmu dipermudah, diberikan karir yang bagus, dan semua yang kamu perjuangkan
-      satu per satu tercapai, Aamiin 🤍<br><br>
-      Terima kasih karena sudah hadir di hidupku.
-      Aku bangga sama kamu, Loveuuu 🤍
-    </p>
-    <div class="lcard">
-      <p>
-        tap sekali yaa ❤️
-      </p>
-  </div>
-
- <script>
-const music = document.getElementById("bgMusic");
-let played = false;
-
-function playMusic() {
-  if (!played) {
-    music.volume = 0.6;
-    music.play().catch(() => {});
-    played = true;
-
-    const hint = document.querySelector(".tap-hint");
-    if (hint) hint.style.display = "none";
-  }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  overflow: hidden;
+}
 
-document.body.addEventListener("click", playMusic);
-document.body.addEventListener("touchstart", playMusic);
+/* ❤️ BACKGROUND HEART LAYER */
+#heartLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
 
-// ❤️ floating hearts
+/* 🎴 FLIP SCENE */
+.scene {
+  width: 100%;
+  max-width: 380px;
+  height: 520px;
+  perspective: 1200px;
+  z-index: 2;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 2s ease;
+  cursor: pointer;
+}
+
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 16px 32px rgba(0,0,0,.15);
+  padding: 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* FRONT */
+.front .heart {
+  font-size: 42px;
+  animation: beat 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.front p {
+  color: #777;
+  font-size: 14px;
+  margin-top: 14px;
+}
+
+/* BACK */
+.back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+
+.back h1 {
+  color: #ff4d6d;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.back p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ❤️ HEART ANIMATION */
+.floating-heart {
+  position: absolute;
+  bottom: -10px;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ❤️ HEART BACKGROUND -->
+<div id="heartLayer"></div>
+
+<!-- 🎴 CARD -->
+<div class="scene">
+  <div class="card" id="card">
+
+    <!-- DEPAN -->
+    <div class="card-face front">
+      <div class="heart">❤️</div>
+      <h2>Happy Birthday</h2>
+      <p>tap gemoykuu</p>
+    </div>
+
+    <!-- BELAKANG -->
+    <div class="card-face back">
+      <h1>Happy Birthday, Gemoykuuu 🎁</h1>
+      <p>
+        Semoga di umur yang baru ini, kamu selalu dikelilingi hal-hal baik.<br><br>
+        Langkahmu dipermudah, diberikan karir yang bagus,
+        dan semua yang kamu perjuangkan satu per satu tercapai. Aamiin 🤍<br><br>
+        Terima kasih yaa udah jadi pacar gemeyku yang pengertian.
+        Aku bangga sama kamu. <br><br>
+        Love you soo muchhh 🤍
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const card = document.getElementById("card");
+const heartLayer = document.getElementById("heartLayer");
+
+let started = false;
+
+/* 🎴 FLIP CARD BOLAK-BALIK */
+card.addEventListener("click", () => {
+  card.classList.toggle("flip");
+
+  if (!started) {
+    started = true;
+    setInterval(createHeart, 300);
+  }
+});
+
+/* ❤️ HEART BACKGROUND */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "floating-heart";
-  heart.innerHTML = "🤍";
+  heart.innerHTML = "❤️";
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.fontSize = (Math.random() * 14 + 14) + "px";
-  heart.style.opacity = Math.random() * 0.5 + 0.4;
+  heart.style.opacity = Math.random() * 0.4 + 0.3;
   heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
 
-  document.body.appendChild(heart);
+  heartLayer.appendChild(heart);
   setTimeout(() => heart.remove(), 8000);
 }
-
-setInterval(createHeart, 150);
 </script>
-
 
 </body>
 </html>
