@@ -10,7 +10,6 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
 }
-<audio id="bgMusic" src="assets/music/Perfect.mp3" preload="auto"></audio>
 
 body {
   margin: 0;
@@ -23,7 +22,7 @@ body {
   overflow: hidden;
 }
 
-/* ❤️ BACKGROUND HEART LAYER */
+/* ❤️ BACKGROUND HEART */
 #heartLayer {
   position: fixed;
   inset: 0;
@@ -31,7 +30,7 @@ body {
   pointer-events: none;
 }
 
-/* 🎴 FLIP SCENE */
+/* 🎴 SCENE */
 .scene {
   width: 100%;
   max-width: 380px;
@@ -45,7 +44,7 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 2s ease;
+  transition: transform 1.6s ease;
   cursor: pointer;
 }
 
@@ -71,14 +70,12 @@ body {
 /* FRONT */
 .front .heart {
   font-size: 42px;
-  animation: beat 2s ease-in-out infinite;
-  transform-origin: center;
+  animation: beat 2s infinite;
 }
 
 .front p {
   color: #777;
   font-size: 14px;
-  margin-top: 14px;
 }
 
 /* BACK */
@@ -99,7 +96,7 @@ body {
   line-height: 1.6;
 }
 
-/* ❤️ HEART ANIMATION */
+/* ❤️ FLOATING HEART */
 .floating-heart {
   position: absolute;
   bottom: -10px;
@@ -120,6 +117,9 @@ body {
 
 <body>
 
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" src="assets/music/Perfect.mp3" preload="auto"></audio>
+
 <!-- ❤️ HEART BACKGROUND -->
 <div id="heartLayer"></div>
 
@@ -127,22 +127,20 @@ body {
 <div class="scene">
   <div class="card" id="card">
 
-    <!-- DEPAN -->
     <div class="card-face front">
       <div class="heart">❤️</div>
       <h2>Happy Birthday</h2>
       <p>tap gemoykuu</p>
     </div>
 
-    <!-- BELAKANG -->
     <div class="card-face back">
       <h1>Happy Birthday, Gemoykuuu 🎁</h1>
       <p>
         Semoga di umur yang baru ini, kamu selalu dikelilingi hal-hal baik.<br><br>
-        Langkahmu dipermudah, diberikan karir yang bagus,
+        Langkahmu dipermudah, karirnya dilancarkan,
         dan semua yang kamu perjuangkan satu per satu tercapai. Aamiin 🤍<br><br>
-        Terima kasih yaa udah jadi pacar gemeyku yang pengertian.
-        Aku bangga sama kamu. <br><br>
+        Terima kasih yaa udah jadi pacar gemeyku.
+        Aku bangga sama kamu.<br><br>
         Love you soo muchhh 🤍
       </p>
     </div>
@@ -153,40 +151,26 @@ body {
 <script>
 const card = document.getElementById("card");
 const heartLayer = document.getElementById("heartLayer");
+const music = document.getElementById("bgMusic");
 
 let started = false;
+let musicPlayed = false;
 
-/* 🎴 FLIP CARD BOLAK-BALIK */
 card.addEventListener("click", () => {
   card.classList.toggle("flip");
+
+  if (!musicPlayed) {
+    music.volume = 0.6;
+    music.play().catch(() => {});
+    musicPlayed = true;
+  }
 
   if (!started) {
     started = true;
     setInterval(createHeart, 300);
   }
-
-  <script>
-  const card = document.querySelector(".card");
-  const music = document.getElementById("bgMusic");
-
-  let musicPlayed = false;
-
-  card.addEventListener("click", () => {
-    // putar kartu
-    card.classList.toggle("flipped");
-
-    // nyalakan musik sekali saja
-    if (!musicPlayed) {
-      music.volume = 0.6;
-      music.play().catch(() => {});
-      musicPlayed = true;
-    }
-  });
-</script>
-
 });
 
-/* ❤️ HEART BACKGROUND */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "floating-heart";
@@ -195,7 +179,6 @@ function createHeart() {
   heart.style.fontSize = (Math.random() * 14 + 14) + "px";
   heart.style.opacity = Math.random() * 0.4 + 0.3;
   heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-
   heartLayer.appendChild(heart);
   setTimeout(() => heart.remove(), 8000);
 }
@@ -203,4 +186,3 @@ function createHeart() {
 
 </body>
 </html>
-
