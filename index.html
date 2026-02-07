@@ -118,7 +118,12 @@ body {
 <body>
 
 <!-- 🎵 MUSIC -->
-<audio id="bgMusic" src="assets/music/Perfect.mp3" preload="auto"></audio>
+<audio
+  id="bgMusic"
+  src="assets/music/Perfect.mp3"
+  preload="auto"
+  playsinline
+></audio>
 
 <!-- ❤️ HEART BACKGROUND -->
 <div id="heartLayer"></div>
@@ -147,29 +152,31 @@ body {
 
   </div>
 </div>
-  
- <script>
-   const card = document.getElementById("card");
+
+<script>
+const card = document.getElementById("card");
 const heartLayer = document.getElementById("heartLayer");
 const music = document.getElementById("bgMusic");
 
 let started = false;
 let musicUnlocked = false;
 
+/* 🔓 UNLOCK AUDIO (WAJIB UNTUK HP) */
 function unlockMusic() {
   if (!musicUnlocked) {
-    music.volume = 0.6;
+    music.muted = true; // trik iOS
     music.play().then(() => {
+      music.muted = false;
+      music.volume = 0.6;
       musicUnlocked = true;
     }).catch(() => {});
   }
 }
 
-/* 🔓 UNLOCK AUDIO — PALING PENTING */
 document.body.addEventListener("click", unlockMusic, { once: true });
 document.body.addEventListener("touchstart", unlockMusic, { once: true });
 
-/* 🎴 CARD INTERACTION */
+/* 🎴 CARD CLICK */
 card.addEventListener("click", () => {
   card.classList.toggle("flip");
 
@@ -179,7 +186,7 @@ card.addEventListener("click", () => {
   }
 });
 
-/* ❤️ HEART */
+/* ❤️ HEART BACKGROUND */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "floating-heart";
@@ -191,10 +198,7 @@ function createHeart() {
   heartLayer.appendChild(heart);
   setTimeout(() => heart.remove(), 8000);
 }
-  </script>
+</script>
 
 </body>
 </html>
-
-
-
