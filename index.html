@@ -10,6 +10,7 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
 }
+<audio id="bgMusic" src="assets/music/Perfect.mp3" preload="auto"></audio>
 
 body {
   margin: 0;
@@ -163,6 +164,26 @@ card.addEventListener("click", () => {
     started = true;
     setInterval(createHeart, 300);
   }
+
+  <script>
+  const card = document.querySelector(".card");
+  const music = document.getElementById("bgMusic");
+
+  let musicPlayed = false;
+
+  card.addEventListener("click", () => {
+    // putar kartu
+    card.classList.toggle("flipped");
+
+    // nyalakan musik sekali saja
+    if (!musicPlayed) {
+      music.volume = 0.6;
+      music.play().catch(() => {});
+      musicPlayed = true;
+    }
+  });
+</script>
+
 });
 
 /* ❤️ HEART BACKGROUND */
@@ -182,3 +203,4 @@ function createHeart() {
 
 </body>
 </html>
+
